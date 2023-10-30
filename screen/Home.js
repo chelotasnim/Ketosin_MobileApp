@@ -30,7 +30,6 @@ export default function Home({ navigation }) {
           'Authorization': `Bearer ${state_token}`
         }
       }).then(result => {
-        console.log(result.data);
         setUserName(result.data.peserta.nama_peserta);
         setUserGrade(result.data.peserta.kelas);
       }).catch(err => console.log('error : ', err));

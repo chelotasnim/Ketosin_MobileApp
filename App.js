@@ -8,6 +8,7 @@ import Index from "./screen/Index";
 import Home from "./screen/Home";
 import Vote from "./screen/Vote";
 import Token from "./screen/Token";
+import Notif from "./screen/Notif";
 import About from "./screen/About";
 import Scan from "./screen/Scan";
 
@@ -25,6 +26,7 @@ export default function App() {
         <Stack.Screen name="home" component={Home} />
         <Stack.Screen name="vote" component={Vote} />
         <Stack.Screen name="token" component={Token} />
+        <Stack.Screen name="notif" component={Notif} />
         <Stack.Screen name="about" component={About} />
         <Stack.Screen name="scan" component={Scan} />
       </Stack.Navigator>

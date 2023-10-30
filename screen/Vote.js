@@ -1,77 +1,112 @@
 import { Dimensions, Image, ScrollView, StyleSheet, Text, TouchableNativeFeedback, TouchableWithoutFeedback, View } from 'react-native';
-import React from 'react';
+import React, { Component } from 'react';
 import Container from '../component/Container';
 import Icon from "react-native-vector-icons/Ionicons";
 import LinearGradient from 'react-native-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { BASE_URL } from '../Config';
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-export default function Vote({ navigation }) {
+const Kandidat = ({ kandidat, choose, updateChoose }) => {
     return (
-        <Container padding={true}>
-            <TouchableWithoutFeedback onPressIn={() => { navigation.navigate("home") }}>
-                <View style={styles.header}>
-                    <Icon
-                        name="chevron-back-outline"
-                        size={20}
+        <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} colors={["rgb(200, 200, 230)", "rgb(200, 200, 230)"]} style={styles.card}>
+            <Image style={styles.cardImage} source={require('../assets/img/kandidat.png')} />
+            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} colors={["rgba(0, 0, 20, .1)", "rgba(0, 0, 20, .6)"]} style={styles.cardShade}></LinearGradient>
+            <View style={styles.cardHeader}>
+                <TouchableNativeFeedback onPressIn={() => updateChoose(kandidat.id_kandidat)}>
+                    <Icon style={styles.radio}
+                        name={choose === kandidat.id_kandidat ? "radio-button-on-outline" : "radio-button-off-outline"}
+                        size={32}
                     />
-                    <Text style={styles.headerContent}>Kembali</Text>
-                </View>
-            </TouchableWithoutFeedback>
-            <ScrollView style={styles.cardList}>
-                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgb(1, 197, 235)", "rgb(4, 189, 231)"]} style={styles.card}>
-                    <Image style={styles.cardImage} source={require('../assets/img/kandidat.png')} />
-                    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgba(1, 197, 235, .6)", "rgb(4, 189, 231)"]} style={styles.cardShade}></LinearGradient>
-                    <View style={styles.cardHeader}>
-                        <TouchableNativeFeedback>
-                            <Icon style={styles.radio}
-                                name="stop-outline"
-                                size={24}
-                            />
-                        </TouchableNativeFeedback>
-                        <TouchableWithoutFeedback>
-                            <Text style={styles.detailBtn}>Detail Kandidat</Text>
-                        </TouchableWithoutFeedback>
-                    </View>
-                    <View style={styles.cardDetail}>
-                        <Text style={styles.label}>Ketua</Text>
-                        <Text style={styles.person}>Ahmad Soebardjo</Text>
-                        <Text style={styles.label}>Wakil</Text>
-                        <Text style={styles.person}>Yuviar Nuzul</Text>
-                        <Text style={styles.slogan}>"Bersinergi untuk kantong pribadi dan kenikmatan sesaat"</Text>
-                    </View>
-                </LinearGradient>
-                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgb(3, 137, 201)", "rgb(5, 125, 190)"]} style={styles.card}>
-                    <Image style={styles.cardImage} source={require('../assets/img/kandidat2.png')} />
-                    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgba(3, 137, 201, .6)", "rgb(5, 125, 190)"]} style={styles.cardShade}></LinearGradient>
-                    <View style={styles.cardHeader}>
-                        <TouchableNativeFeedback>
-                            <Icon style={styles.radio}
-                                name="stop-outline"
-                                size={24}
-                            />
-                        </TouchableNativeFeedback>
-                        <TouchableWithoutFeedback>
-                            <Text style={styles.detailBtn}>Detail Kandidat</Text>
-                        </TouchableWithoutFeedback>
-                    </View>
-                    <View style={styles.cardDetail}>
-                        <Text style={styles.label}>Ketua</Text>
-                        <Text style={styles.person}>Ahmad Soebardjo</Text>
-                        <Text style={styles.label}>Wakil</Text>
-                        <Text style={styles.person}>Yuviar Nuzul</Text>
-                        <Text style={styles.slogan}>"Bersinergi untuk kantong pribadi dan kenikmatan sesaat"</Text>
-                    </View>
-                </LinearGradient>
-                <TouchableWithoutFeedback onPressIn={() => { navigation.navigate('token') }}>
-                    <View style={styles.sendBtn}>
-                        <Text style={styles.sendBtnText}>VOTE</Text>
+                </TouchableNativeFeedback>
+                <TouchableWithoutFeedback>
+                    <Text style={styles.detailBtn}>Detail Kandidat</Text>
+                </TouchableWithoutFeedback>
+            </View>
+            <View style={styles.cardDetail}>
+                <Text style={styles.label}>Ketua</Text>
+                <Text style={styles.person}>{kandidat.nama_ketua}</Text>
+                <Text style={styles.label}>Wakil</Text>
+                <Text style={styles.person}>{kandidat.nama_wakil}</Text>
+                <Text style={styles.slogan}>"{kandidat.slogan}"</Text>
+            </View>
+        </LinearGradient>
+    );
+};
+
+export default class Vote extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            choose: null,
+            token: '',
+            status_vote: null,
+            datas: []
+        };
+    };
+
+    componentDidMount() {
+        this.getData();
+    };
+
+    updateChoose = e => {
+        this.setState({ choose: e });
+    };
+
+    async getData() {
+        const token = await AsyncStorage.getItem('auth_token');
+        this.setState({ token });
+
+        axios.get(`${BASE_URL}kandidat`, {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${this.state.token}`
+            }
+        }).then(result => {
+            this.setState({ status_vote: result.data.status_vote });
+            this.setState({ datas: result.data.kandidats });
+        }).catch(err => console.log('error : ', err));
+    };
+
+    render() {
+        return (
+            <Container padding={true} start={true}>
+                <TouchableWithoutFeedback onPressIn={() => { this.props.navigation.navigate("home") }}>
+                    <View style={styles.header}>
+                        <Icon
+                            name="chevron-back-outline"
+                            size={20}
+                        />
+                        <Text style={styles.headerContent}>Kembali</Text>
                     </View>
                 </TouchableWithoutFeedback>
-            </ScrollView>
-        </Container>
-    );
+                <ScrollView style={styles.cardList}>
+                    {
+                        this.state.datas.map((data) => {
+                            if (data) {
+                                return <Kandidat key={data.id_kandidat} kandidat={data} choose={this.state.choose} updateChoose={this.updateChoose} />;
+                            };
+                        })
+                    }
+                </ScrollView>
+                {
+                    this.state.status_vote === 0 && this.state.choose != null ?
+                        <TouchableWithoutFeedback onPressIn={() => { this.props.navigation.navigate('token', { choose: this.state.choose }) }}>
+                            <View style={styles.sendBtn}>
+                                <Text style={styles.sendBtnText}>VOTE</Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+                        :
+                        <View style={[styles.sendBtn, { opacity: .4 }]}>
+                            <Text style={styles.sendBtnText}>VOTE</Text>
+                        </View>
+                }
+            </Container>
+        );
+    };
 };
 
 const styles = StyleSheet.create({
@@ -86,7 +121,8 @@ const styles = StyleSheet.create({
     },
     cardList: {
         marginTop: 20,
-        marginBottom: 0
+        marginBottom: 16,
+        maxHeight: SCREEN_HEIGHT / 1.2
     },
     card: {
         height: SCREEN_WIDTH / 1.2,
@@ -116,6 +152,7 @@ const styles = StyleSheet.create({
         color: "rgb(255, 255, 255)"
     },
     detailBtn: {
+        marginTop: -16,
         color: "rgba(255, 255, 255, .8)"
     },
     cardDetail: {
@@ -129,6 +166,7 @@ const styles = StyleSheet.create({
     },
     person: {
         marginBottom: 8,
+        textTransform: 'capitalize',
         color: "rgba(255, 255, 255, .9)"
     },
     slogan: {
@@ -138,6 +176,7 @@ const styles = StyleSheet.create({
     },
     sendBtn: {
         padding: 16,
+        width: SCREEN_WIDTH / 1.2,
         backgroundColor: "rgb(255, 255, 255)",
         borderRadius: 12
     },

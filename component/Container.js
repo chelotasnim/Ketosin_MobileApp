@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Dimensions } from "react-native";
 import RadialGradient from "react-native-radial-gradient";
 
-export default function Container({ children, padding }) {
+export default function Container({ children, padding, start }) {
   const SCREEN_HEIGHT = Dimensions.get("window").height;
   const SCREEN_WIDTH = Dimensions.get("window").width;
   return (
@@ -15,7 +15,7 @@ export default function Container({ children, padding }) {
         width: SCREEN_WIDTH,
         flex: 1,
         padding: padding ? 19 : 0,
-        justifyContent: "center",
+        justifyContent: start === true ? "flex-start" : "center",
         alignItems: "center",
         position: "relative",
       }}
