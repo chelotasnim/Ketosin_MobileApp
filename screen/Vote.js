@@ -10,22 +10,37 @@ import { BASE_URL } from '../Config';
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-const Kandidat = ({ kandidat, choose, updateChoose }) => {
+const Kandidat = ({ kandidat, choose, updateChoose, status_vote, navigation }) => {
     return (
         <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} colors={["rgb(200, 200, 230)", "rgb(200, 200, 230)"]} style={styles.card}>
             <Image style={styles.cardImage} source={require('../assets/img/kandidat.png')} />
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} colors={["rgba(0, 0, 20, .1)", "rgba(0, 0, 20, .6)"]} style={styles.cardShade}></LinearGradient>
-            <View style={styles.cardHeader}>
-                <TouchableNativeFeedback onPressIn={() => updateChoose(kandidat.id_kandidat)}>
-                    <Icon style={styles.radio}
-                        name={choose === kandidat.id_kandidat ? "radio-button-on-outline" : "radio-button-off-outline"}
-                        size={32}
-                    />
-                </TouchableNativeFeedback>
-                <TouchableWithoutFeedback>
-                    <Text style={styles.detailBtn}>Detail Kandidat</Text>
-                </TouchableWithoutFeedback>
-            </View>
+            {
+                status_vote === 0 ?
+                    <View style={styles.cardHeader}>
+                        <TouchableNativeFeedback onPressIn={() => updateChoose(kandidat.id_kandidat)}>
+                            <Icon style={styles.radio}
+                                name={choose === kandidat.id_kandidat ? "radio-button-on-outline" : "radio-button-off-outline"}
+                                size={32}
+                            />
+                        </TouchableNativeFeedback>
+                        <TouchableWithoutFeedback onPressIn={() => { navigation.navigate("detail", { id_kandidat: kandidat.id_kandidat }) }}>
+                            <Text style={styles.detailBtn}>Detail Kandidat</Text>
+                        </TouchableWithoutFeedback>
+                    </View>
+                    :
+                    <View style={styles.cardHeader}>
+                        <TouchableNativeFeedback>
+                            <Icon style={[styles.radio, styles.notAppear]}
+                                name={choose === kandidat.id_kandidat ? "radio-button-on-outline" : "radio-button-off-outline"}
+                                size={32}
+                            />
+                        </TouchableNativeFeedback>
+                        <TouchableWithoutFeedback onPressIn={() => { navigation.navigate("detail", { id_kandidat: kandidat.id_kandidat }) }}>
+                            <Text style={styles.detailBtn}>Detail Kandidat</Text>
+                        </TouchableWithoutFeedback>
+                    </View>
+            }
             <View style={styles.cardDetail}>
                 <Text style={styles.label}>Ketua</Text>
                 <Text style={styles.person}>{kandidat.nama_ketua}</Text>
@@ -87,7 +102,7 @@ export default class Vote extends Component {
                     {
                         this.state.datas.map((data) => {
                             if (data) {
-                                return <Kandidat key={data.id_kandidat} kandidat={data} choose={this.state.choose} updateChoose={this.updateChoose} />;
+                                return <Kandidat key={data.id_kandidat} kandidat={data} choose={this.state.choose} updateChoose={this.updateChoose} status_vote={this.state.status_vote} navigation={this.props.navigation} />;
                             };
                         })
                     }
@@ -183,5 +198,8 @@ const styles = StyleSheet.create({
     sendBtnText: {
         textAlign: "center",
         color: "rgb(100, 100, 100)"
+    },
+    notAppear: {
+        opacity: 0
     }
 });

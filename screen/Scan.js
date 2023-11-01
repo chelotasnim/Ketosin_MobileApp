@@ -34,7 +34,7 @@ class Scan extends Component {
         AsyncStorage.clear();
         AsyncStorage.setItem('auth_token', result.data.token);
         this.props.navigation.replace('home');
-      } else if (result.data.token == null && result.data.status) {
+      } else {
         this.props.navigation.replace('index', {
           fail: {
             icon: 'qr-code-outline',
