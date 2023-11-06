@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "org.reactnative.camera.react-native-camera-merged_res-24:/layout-watch-v20/abc_alert_dialog_title_material.xml",
+        "source": "org.reactnative.camera.react-native-camera-appcompat-1.4.1-12:/layout-watch-v20/abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "org.reactnative.camera.react-native-camera-merged_res-24:/layout-watch-v20/abc_alert_dialog_button_bar_material.xml",
+        "source": "org.reactnative.camera.react-native-camera-appcompat-1.4.1-12:/layout-watch-v20/abc_alert_dialog_button_bar_material.xml"
+    }
+]

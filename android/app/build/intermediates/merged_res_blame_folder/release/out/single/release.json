@@ -1,0 +1,98 @@
+[
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable-mdpi_assets_img_version.png.flat",
+        "source": "com.ketosin.app-res-41:/drawable-mdpi/assets_img_version.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable_rn_edit_text_material.xml.flat",
+        "source": "com.ketosin.app-main-48:/drawable/rn_edit_text_material.xml"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable-xhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.ketosin.app-res-41:/drawable-xhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.ketosin.app-res-41:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backiconmask.png.flat",
+        "source": "com.ketosin.app-res-41:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backiconmask.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.ketosin.app-main-48:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.ketosin.app-main-48:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable-hdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.ketosin.app-res-41:/drawable-hdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.ketosin.app-main-48:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.ketosin.app-main-48:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.ketosin.app-main-48:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.ketosin.app-main-48:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable-mdpi_assets_img_kpo.png.flat",
+        "source": "com.ketosin.app-res-41:/drawable-mdpi/assets_img_kpo.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable-mdpi_assets_img_vote.png.flat",
+        "source": "com.ketosin.app-res-41:/drawable-mdpi/assets_img_vote.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable-mdpi_assets_img_logout.png.flat",
+        "source": "com.ketosin.app-res-41:/drawable-mdpi/assets_img_logout.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.ketosin.app-main-48:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable-xxxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.ketosin.app-res-41:/drawable-xxxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable-mdpi_assets_img_fail.png.flat",
+        "source": "com.ketosin.app-res-41:/drawable-mdpi/assets_img_fail.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable-mdpi_assets_img_kandidat.png.flat",
+        "source": "com.ketosin.app-res-41:/drawable-mdpi/assets_img_kandidat.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.ketosin.app-main-48:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable-xxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.ketosin.app-res-41:/drawable-xxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.ketosin.app-main-48:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/drawable-mdpi_assets_img_kandidat2.png.flat",
+        "source": "com.ketosin.app-res-41:/drawable-mdpi/assets_img_kandidat2.png"
+    },
+    {
+        "merged": "com.ketosin.app-merged_res-47:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.ketosin.app-main-48:/mipmap-xhdpi/ic_launcher.png"
+    }
+]
