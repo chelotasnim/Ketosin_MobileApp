@@ -2905,10 +2905,13 @@ drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable assets_img_fail
-drawable assets_img_kandidat
-drawable assets_img_kandidat2
 drawable assets_img_kpo
 drawable assets_img_logout
+drawable assets_img_nopic
+drawable assets_img_paslon
+drawable assets_img_pasloncewe
+drawable assets_img_pasloncowo
+drawable assets_img_paslonhitam
 drawable assets_img_version
 drawable assets_img_vote
 drawable autofill_inline_suggestion_chip_background

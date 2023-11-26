@@ -17,6 +17,7 @@ export default class Detail extends Component {
         this.state = {
             token: "",
             kandidat: {
+                id: null,
                 ketua: "",
                 wakil: ""
             },
@@ -46,8 +47,9 @@ export default class Detail extends Component {
         }).then(result => {
             this.setState({
                 kandidat: {
+                    id: id_kandidat,
                     ketua: result.data.kandidat.nama_ketua,
-                    wakil: result.data.kandidat.nama_wakil,
+                    wakil: result.data.kandidat.nama_wakil
                 },
                 datas: {
                     slogan: result.data.kandidat.slogan,
@@ -70,25 +72,47 @@ export default class Detail extends Component {
                         <Text style={styles.headerContent}>Kembali</Text>
                     </View>
                 </TouchableWithoutFeedback>
-                <View style={styles.img_container}>
-                    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgb(1, 197, 235)", "rgb(4, 189, 231)"]} style={styles.img_box}>
-                        <Image source={require('../assets/img/kandidat.png')} style={styles.img} />
-                        <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgba(1, 197, 235, .6)", "rgba(4, 189, 231, .6)"]} style={styles.fade_bg}></LinearGradient>
-                        <View style={styles.profile}>
-                            <Text style={styles.label}>Ketua</Text>
-                            <Text style={styles.name}>{this.state.kandidat.ketua}</Text>
+                {
+                    this.state.kandidat.id == 1 ?
+                        <View style={styles.img_container}>
+                            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgb(1, 197, 235)", "rgb(4, 189, 231)"]} style={styles.img_box}>
+                                <Image source={require('../assets/img/paslon-cowo.png')} style={styles.img_isset} />
+                                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgba(1, 197, 235, .6)", "rgba(4, 189, 231, .6)"]} style={styles.fade_bg}></LinearGradient>
+                                <View style={styles.profile}>
+                                    <Text style={styles.label}>Ketua</Text>
+                                    <Text style={styles.name}>{this.state.kandidat.ketua}</Text>
+                                </View>
+                            </LinearGradient>
+                            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgb(3, 137, 201)", "rgb(5, 125, 190)"]} style={styles.img_box}>
+                                <Image source={require('../assets/img/paslon-cewe.png')} style={styles.img_isset} />
+                                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgba(3, 137, 201, .6)", "rgba(5, 125, 190, .6)"]} style={styles.fade_bg}></LinearGradient>
+                                <View style={styles.profile}>
+                                    <Text style={styles.label}>Wakil</Text>
+                                    <Text style={styles.name}>{this.state.kandidat.wakil}</Text>
+                                </View>
+                            </LinearGradient>
                         </View>
-                    </LinearGradient>
-                    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgb(3, 137, 201)", "rgb(5, 125, 190)"]} style={styles.img_box}>
-                        <Image source={require('../assets/img/kandidat.png')} style={styles.img} />
-                        <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgba(3, 137, 201, .6)", "rgba(5, 125, 190, .6)"]} style={styles.fade_bg}></LinearGradient>
-                        <View style={styles.profile}>
-                            <Text style={styles.label}>Wakil</Text>
-                            <Text style={styles.name}>{this.state.kandidat.wakil}</Text>
+                        :
+                        <View style={styles.img_container}>
+                            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgb(1, 197, 235)", "rgb(4, 189, 231)"]} style={styles.img_box}>
+                                <Image source={require('../assets/img/no-pic.png')} style={styles.img} />
+                                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgba(1, 197, 235, .6)", "rgba(4, 189, 231, .6)"]} style={styles.fade_bg}></LinearGradient>
+                                <View style={styles.profile}>
+                                    <Text style={styles.label}>Ketua</Text>
+                                    <Text style={styles.name}>{this.state.kandidat.ketua}</Text>
+                                </View>
+                            </LinearGradient>
+                            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgb(3, 137, 201)", "rgb(5, 125, 190)"]} style={styles.img_box}>
+                                <Image source={require('../assets/img/no-pic.png')} style={styles.img} />
+                                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgba(3, 137, 201, .6)", "rgba(5, 125, 190, .6)"]} style={styles.fade_bg}></LinearGradient>
+                                <View style={styles.profile}>
+                                    <Text style={styles.label}>Wakil</Text>
+                                    <Text style={styles.name}>{this.state.kandidat.wakil}</Text>
+                                </View>
+                            </LinearGradient>
                         </View>
-                    </LinearGradient>
-                </View>
-                <ScrollView style={styles.content}>
+                }
+                <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
                     <Box datas={{ label: "Slogan", content: this.state.datas.slogan }} />
                     <Box datas={{ label: "Visi", content: this.state.datas.visi }} />
                     {
@@ -118,17 +142,26 @@ const styles = StyleSheet.create({
     },
     img_box: {
         height: SCREEN_HEIGHT / 2.5,
-        width: SCREEN_WIDTH / 2.5,
-        borderRadius: 8,
+        width: SCREEN_WIDTH / 2.85,
+        borderRadius: 5,
         overflow: "hidden"
     },
     img: {
         position: "absolute",
         bottom: 0,
         width: "100%",
+        height: "75%",
+        objectFit: "cover"
+    },
+
+    img_isset: {
+        position: "absolute",
+        bottom: 0,
+        width: "100%",
         height: "85%",
         objectFit: "cover"
     },
+
     fade_bg: {
         position: "absolute",
         top: 0,
@@ -139,8 +172,8 @@ const styles = StyleSheet.create({
     profile: {
         position: "absolute",
         bottom: 0,
-        paddingHorizontal: 16,
-        paddingBottom: 14
+        paddingHorizontal: 10,
+        paddingBottom: 10
     },
     label: {
         color: "rgba(255, 255, 255, .7)"
@@ -152,7 +185,7 @@ const styles = StyleSheet.create({
         color: "rgb(255, 255, 255)"
     },
     content: {
-        width: SCREEN_WIDTH / 1.19,
+        width: SCREEN_WIDTH / 1.35,
         marginTop: 16,
     }
 })

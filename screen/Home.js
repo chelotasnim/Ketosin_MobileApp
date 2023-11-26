@@ -56,8 +56,13 @@ export default function Home({ navigation }) {
       <View style={styles.top}>
         <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgb(1, 197, 235)", "rgb(4, 189, 231)"]} style={[styles.box1, { height: SCREEN_HEIGHT / 3.2 }]}>
           <Image
-            source={require("../assets/img/kandidat.png")}
-            style={{ width: 175, height: 175, objectFit: "contain", position: "absolute", bottom: 0 }}
+            source={require("../assets/img/paslon-cowo.png")}
+            style={{ width: 165, height: 165, objectFit: "contain", position: "absolute", bottom: 0, left: -64 }}
+            resizeMode="center"
+          />
+          <Image
+            source={require("../assets/img/paslon-cewe.png")}
+            style={{ width: 150, height: 150, objectFit: "contain", position: "absolute", bottom: -18, left: -12 }}
             resizeMode="center"
           />
           <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgba(1, 197, 235, .6)", "rgba(4, 189, 231, .6)"]} style={styles.fade_bg}></LinearGradient>
@@ -68,8 +73,8 @@ export default function Home({ navigation }) {
         </View>
         <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgb(3, 137, 201)", "rgb(5, 125, 190)"]} style={[styles.box1, { height: SCREEN_HEIGHT / 4 }]}>
           <Image
-            source={require("../assets/img/kandidat2.png")}
-            style={{ width: 175, height: 175, objectFit: "contain", position: "absolute", bottom: 0 }}
+            source={require("../assets/img/no-pic.png")}
+            style={{ width: 135, height: 135, objectFit: "contain", position: "absolute", bottom: 0 }}
             resizeMode="center"
           />
           <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["rgba(3, 137, 201, .6)", "rgba(5, 125, 190, .6)"]} style={[styles.fade_bg]}></LinearGradient>
@@ -148,7 +153,7 @@ const styles = StyleSheet.create({
   box1: {
     position: "relative",
     width: SCREEN_WIDTH / 4.3,
-    borderRadius: 10,
+    borderRadius: 5,
     overflow: "hidden",
     justifyContent: "center",
     alignItems: "center",
@@ -165,7 +170,7 @@ const styles = StyleSheet.create({
     height: SCREEN_HEIGHT / 4.3,
     backgroundColor: "rgb(182, 185, 241)",
     width: SCREEN_WIDTH / 4.8,
-    borderRadius: 10,
+    borderRadius: 5,
     marginHorizontal: 12,
     flexDirection: "row",
     justifyContent: "center",
@@ -186,6 +191,6 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     textAlign: "center",
     fontFamily: "Montserrat-Light",
-    color: "rgba(255, 255, 255, .5)"
+    color: "rgba(255, 255, 255, .3)"
   },
 });

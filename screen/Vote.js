@@ -13,7 +13,12 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 const Kandidat = ({ kandidat, choose, updateChoose, status_vote, navigation }) => {
     return (
         <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} colors={["rgb(200, 200, 230)", "rgb(200, 200, 230)"]} style={styles.card}>
-            <Image style={styles.cardImage} source={require('../assets/img/kandidat.png')} />
+            {
+                kandidat.id_kandidat == 1 ?
+                    <Image style={styles.cardImage} source={require('../assets/img/paslon.png')} />
+                    :
+                    <Image style={[styles.cardImage, { opacity: .4 }]} source={require('../assets/img/paslon-hitam.png')} />
+            }
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} colors={["rgba(0, 0, 20, .1)", "rgba(0, 0, 20, .6)"]} style={styles.cardShade}></LinearGradient>
             {
                 status_vote === 0 ?
@@ -45,8 +50,7 @@ const Kandidat = ({ kandidat, choose, updateChoose, status_vote, navigation }) =
                 <Text style={styles.label}>Ketua</Text>
                 <Text style={styles.person}>{kandidat.nama_ketua}</Text>
                 <Text style={styles.label}>Wakil</Text>
-                <Text style={styles.person}>{kandidat.nama_wakil}</Text>
-                <Text style={styles.slogan}>"{kandidat.slogan}"</Text>
+                <Text style={[styles.person, { marginBottom: 0 }]}>{kandidat.nama_wakil}</Text>
             </View>
         </LinearGradient>
     );
@@ -86,6 +90,19 @@ export default class Vote extends Component {
         }).catch(err => console.log('error : ', err));
     };
 
+    async vote() {
+        axios.post(`${BASE_URL}kandidat/vote`, {
+            id_kandidat: this.state.choose,
+        }, {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${this.state.token}`
+            }
+        }).then(result => {
+            this.props.navigation.replace('notif', { status: result.data.status, message: result.data.message });
+        }).catch(err => console.log('err : ', err));
+    };
+
     render() {
         return (
             <Container padding={true} start={true}>
@@ -98,7 +115,7 @@ export default class Vote extends Component {
                         <Text style={styles.headerContent}>Kembali</Text>
                     </View>
                 </TouchableWithoutFeedback>
-                <ScrollView style={styles.cardList}>
+                <ScrollView style={styles.cardList} showsVerticalScrollIndicator={false}>
                     {
                         this.state.datas.map((data) => {
                             if (data) {
@@ -109,7 +126,7 @@ export default class Vote extends Component {
                 </ScrollView>
                 {
                     this.state.status_vote === 0 && this.state.choose != null ?
-                        <TouchableWithoutFeedback onPressIn={() => { this.props.navigation.navigate('token', { choose: this.state.choose }) }}>
+                        <TouchableWithoutFeedback onPressIn={() => { this.vote() }}>
                             <View style={styles.sendBtn}>
                                 <Text style={styles.sendBtnText}>VOTE</Text>
                             </View>
@@ -140,20 +157,21 @@ const styles = StyleSheet.create({
         maxHeight: SCREEN_HEIGHT / 1.2
     },
     card: {
-        height: SCREEN_WIDTH / 1.2,
-        width: SCREEN_WIDTH / 1.2,
+        height: SCREEN_WIDTH / 1.4,
+        width: SCREEN_WIDTH / 1.32,
         marginBottom: 16,
-        borderRadius: 12
+        borderRadius: 5
     },
     cardShade: {
         position: "absolute",
         width: "100%",
         height: "100%",
-        borderRadius: 12,
+        borderRadius: 5,
     },
     cardImage: {
         position: "absolute",
         bottom: 0,
+        left: -16,
         width: "100%",
         height: "90%"
     },
@@ -191,9 +209,9 @@ const styles = StyleSheet.create({
     },
     sendBtn: {
         padding: 16,
-        width: SCREEN_WIDTH / 1.2,
+        width: "85%",
         backgroundColor: "rgb(255, 255, 255)",
-        borderRadius: 12
+        borderRadius: 5
     },
     sendBtnText: {
         textAlign: "center",
